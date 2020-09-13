@@ -1,0 +1,12 @@
+Index: u-boot-2020.04/include/linux/types.h
+===================================================================
+--- u-boot-2020.04.orig/include/linux/types.h
++++ u-boot-2020.04/include/linux/types.h
+@@ -1,6 +1,7 @@
+ #ifndef _LINUX_TYPES_H
+ #define _LINUX_TYPES_H
+ 
++typedef unsigned long long __u64;
+ #include <linux/posix_types.h>
+ #include <asm/types.h>
+ #include <stdbool.h>
