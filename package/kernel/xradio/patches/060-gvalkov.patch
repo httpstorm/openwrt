@@ -1,0 +1,46 @@
+Index: xradio/rx.c
+===================================================================
+--- xradio.orig/rx.c
++++ xradio/rx.c
+@@ -10,6 +10,7 @@
+ 
+ 	// MRK: added copy of this tx.c function here for testing, renamed _rx
+ 
++#if defined(CONFIG_XRADIO_USE_EXTENSIONS)
+ static void xradio_check_go_neg_conf_success_rx(struct xradio_common *hw_priv,
+ 						u8 *action)
+ {
+@@ -23,6 +24,7 @@ static void xradio_check_go_neg_conf_suc
+ 		}
+ 	}
+ }
++#endif
+ 
+ 
+ static int xradio_handle_pspoll(struct xradio_vif *priv,
+Index: xradio/sta.c
+===================================================================
+--- xradio.orig/sta.c
++++ xradio/sta.c
+@@ -960,7 +960,7 @@ int xradio_remain_on_channel(struct ieee
+ 	return ret;
+ }
+ 
+-int xradio_cancel_remain_on_channel(struct ieee80211_hw *hw)
++int xradio_cancel_remain_on_channel(struct ieee80211_hw *hw, struct ieee80211_vif *vif)
+ {
+ 	struct xradio_common *hw_priv = hw->priv;
+ 
+Index: xradio/sta.h
+===================================================================
+--- xradio.orig/sta.h
++++ xradio/sta.h
+@@ -64,7 +64,7 @@ int xradio_remain_on_channel(struct ieee
+ 			     struct ieee80211_vif *vif,
+                              struct ieee80211_channel *chan,
+                              int duration, enum ieee80211_roc_type type);
+-int xradio_cancel_remain_on_channel(struct ieee80211_hw *hw);
++int xradio_cancel_remain_on_channel(struct ieee80211_hw *hw, struct ieee80211_vif *vif);
+ int xradio_set_arpreply(struct ieee80211_hw *hw, struct ieee80211_vif *vif);
+ u64 xradio_prepare_multicast(struct ieee80211_hw *hw,
+                              struct netdev_hw_addr_list *mc_list);
