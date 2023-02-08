@@ -389,10 +389,12 @@ config KERNEL_DEBUG_INFO_REDUCED
 
 config KERNEL_DEBUG_LL_UART_NONE
 	bool
+	default n
 	depends on arm
 
 config KERNEL_DEBUG_LL
 	bool
+	default n
 	depends on arm
 	select KERNEL_DEBUG_LL_UART_NONE
 	help
