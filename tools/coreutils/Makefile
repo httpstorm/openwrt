@@ -8,11 +8,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=coreutils
 PKG_CPE_ID:=cpe:/a:gnu:coreutils
-PKG_VERSION:=9.3
+PKG_VERSION:=9.5
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/coreutils
-PKG_HASH:=adbcfcfe899235b71e8768dcf07cd532520b7f54f9a8064843f8d199a904bbaa
+PKG_HASH:=cd328edeac92f6a665de9f323c93b712af1858bc2e0d88f3f7100469470a1b8a
 
 HOST_BUILD_PARALLEL := 1
 
@@ -29,30 +29,6 @@ HOST_MAKE_FLAGS += \
 	$(AM_TOOL_PATHS_FAKE) \
 	PROGRAMS="$(patsubst %,src/%,$(PKG_PROGRAMS))" \
 	LIBRARIES= MANS= SUBDIRS=.
-
-define Host/Bootstrap
-	( \
-		cd $(HOST_BUILD_DIR); \
-		$(AM_TOOL_PATHS_FAKE) \
-		./bootstrap \
-			--bootstrap-sync \
-			--force \
-			--no-git \
-			--skip-po \
-			--gnulib-srcdir=$(GNULIB_SRCDIR) \
-	)
-endef
-
-define Host/Prepare
-	$(call Host/Prepare/Default)
-	$(if $(QUILT),,$(call Host/Bootstrap))
-endef
-
-define Host/Configure
-	$(if $(QUILT),$(call Host/Bootstrap))
-	-$(CP) $(HOST_BUILD_DIR)/lib/time.in.h~ $(HOST_BUILD_DIR)/lib/time.in.h # @GNULIB_TIME@ not defined
-	$(call Host/Configure/Default)
-endef
 
 define Host/Install
 	$(INSTALL_DIR) $(1)/bin
