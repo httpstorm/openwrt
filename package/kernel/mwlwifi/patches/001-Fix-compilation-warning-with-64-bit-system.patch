@@ -152,7 +152,7 @@ Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
  		return -ENOMEM;
 --- a/hif/pcie/pcie.c
 +++ b/hif/pcie/pcie.c
-@@ -1466,8 +1466,8 @@ static void pcie_bf_mimo_ctrl_decode(struct mwl_priv *priv,
+@@ -1466,8 +1466,8 @@ static void pcie_bf_mimo_ctrl_decode(str
  			       &fp_data->f_pos);
  		filp_close(fp_data, current->files);
  	} else {
