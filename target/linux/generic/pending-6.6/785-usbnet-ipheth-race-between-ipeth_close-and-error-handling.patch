@@ -1,0 +1,66 @@
+X-Pm-Gluon-Id: dc57fb58-9622-467d-a597-9880c2213ea9
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+References: <0E5elkMIg5-dqmrTakb-xo6Yx_VnD_6Fc1Wud6LijP3iooYsrIjbLHxx2m9MVKe1conEc0Tjke_LjHS4mToF0A==@protonmail.internalid>
+X-Pm-Date: Tue, 21 Nov 2023 14:43:11 +0000
+X-Pm-External-Id: <20231121144330.3990-1-oneukum@suse.com>
+X-Pm-Internal-Id: 0E5elkMIg5-dqmrTakb-xo6Yx_VnD_6Fc1Wud6LijP3iooYsrIjbLHxx2m9MVKe1conEc0Tjke_LjHS4mToF0A==
+Cc: "Oliver Neukum" <oneukum@suse.com>
+To: <forst@pen.gy>, <diego@giagio.com>, <netdev@vger.kernel.org>,
+ <linux-usb@vger.kernel.org>
+Reply-To: "Oliver Neukum" <oneukum@suse.com>
+From: "Oliver Neukum" <oneukum@suse.com>
+Subject: [RFC] USB: ipeth: race between ipeth_close and error handling
+X-Pm-Spam-Action: inbox
+X-Pm-Spamscore: 0
+X-Pm-Content-Encryption: on-delivery
+X-Pm-Transfer-Encryption: TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+X-Pm-Origin: external
+X-Pm-Spam: 0yezJI6cihyJeYR3pi42biOpJJvbmsCIeI1msjN3X3blJp7IjBlNIIojty4CMCLSJ I6UyuTALMkDsSBlI0TiQ0yOiiSwNUJFPQ9FRkUEVNUSUOU9SIojwfJCLGZiVdfdWmW5abIy6QJye kUE9p7IjfnBIcB3h6ISbCMw4M5MDzTUMNIj5zETOTO2II1MTpCJLbFWnu9VZWYl1oiIj0HNaYNWr i92X2cyVVkdmwzIXMMjwwEDOiIiwVucnh25XbUWihJiOGbtwVhZmyHVdZMXitJCLWYslNhX2nGVd bJ35h52XWbiUJVOiBERUVVETiwiIWbpF9jbFlXRYZ92yw9Vemci9owIjwjcLMcj391nNSfiwF0Y2 vWdZckniVJiOEUBRVTVEiiwIcJ3p6ICZjI1YNjNW4jEMMIDw4UzYjNllA4Nz4GIMZJi9zJCLSY6I Jpeyz19ccFGtwojICLzJ9yY2iWQZO0iwsIjLnIjNJlb3tjoIM4CyyJCLXZvBQicninsOUB1GBB1X 1UiMstOlwC4MXwSiGB1U0XFh9fTEOk9TRIS6uAzWFMs0RLIkfU1SVFkMfRUSVQiUstOlxC4MXwSi JtERVTW9xJQU6CIRW0ywdFjLCLEJlNS0J1NXR50F6ICRzWuA0sMVLkRIS1UfMFkVUSfRYiRUtlsO M4CxiwSXFVT9NfQ0Ek9QW9VUUhVR0XJxUiTktlsOM4Cw91XXCLyJI6cyzyJeY92y6ISZTLuAwiMS wmVcbJ307pjIkIJ19DRFU05TQlUOG91UkUN9pbIjwS4MXwSiZFkQVRfNFNSEbjpILATuiwiNDOuE YlNTsl0IIRkNDJVQ1XPBlDTEBV9WTxEP6IyVyWw0UsLj1nNIcU2ut92YHL1FJhYXpnRbbUmiiwSX lUN9NTSVHU5SXN0ITJVQVRiQswOldjVLLJCSQN1XlRB9xPTE6yIVW0ywsIjLiIhtNtOntHAdbV30 z5iMXdlNRlLmsl0IIJlfJtERVTB9xPTE6yIVW0ywsIjLnI1NUuc2t29YOMn9zV3cWZlRJdMSNCJL S1UFPd0X0TiQstOlxC4MLJC00hXZCXw9FpbGdiJbLJCBi40UlOwsAsLjzmFIbojy5ITOCOgwBuaX 6XQZMkT1zEjLSNy4AuMjvFwMMMjsvNGIWd05k6cniEURXwSiVVkTkUMFhBX06SITW0ywsAjLiIw0 k5LjdCJOLJCGN9kU0XRVVOX0SkZVT00iwslOjLdBJNLCFU1SXR1SFNUQjIbp4wMCwCILOsiiiwSX ERJt9UTVDkFURIS6uAzWCMiwVzc3jS5Zb026dJyKCLSJZEQ1P0NXV5UUIR1XkUFVpbIjwC4MLICz s0lIlIDJRfVkTExVXF0M6ICTzWuA0sMFSkFIQ91O6ISQzWuA0sMFPlRIX10BINEV0XOVJDVlfFRU U90N6ISRzWuA0sMFSkZIT10fTFES0XORpbIjwC4MXwSiQNkUFVD9VOT1GF9VSZVFbpjICMw4I1LC sl0IIRlPOR0X1XPNUiTUwlsOLBjdSJCL1QEZZJX1TV9QTRVQVF0XEVigswOldjBLf1X9
+X-Spam-Flag: NO
+X-Spam-Score: 3.69
+X-Spam-Level: ***
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.42.1
+Message-Id: <20231121144330.3990-1-oneukum@suse.com>
+Date: Tue, 21 Nov 2023 15:43:11 +0100
+Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1; t=1700577812; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:  mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding; bh=r1KLwe8MGM96o13Ok+O9c+C4gQMeo0VhFaSjyUzeaBg=; b=NtFiZII5Zf55NJyMe21wYPn7sG5uX6xJHM0DLzG3RZcHHCqBKk0wCTerkYzp0JdNipNyue 2yumb1+E1laJMU7rOo7jRR3x4NPnfRGOsZh0BPdeVAk+PPcWreTJhB3Q9/6kgwqLYMtNQa sdq8uOTuU9+CVWWyI46yakW5515Alf0=
+Received: from dovecot-director2.suse.de ([192.168.254.65]) by imap2.suse-dmz.suse.de with ESMTPSA id MmLuFxTCXGUbXAAAMHmgww (envelope-from <oneukum@suse.com>); Tue, 21 Nov 2023 14:43:32 +0000
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512) (No client certificate requested) by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 68F69138E3; Tue, 21 Nov 2023 14:43:32 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512) (No client certificate requested) by smtp-out2.suse.de (Postfix) with ESMTPS id 983381F8BE; Tue, 21 Nov 2023 14:43:32 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29]) (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256) (No client certificate requested) by mailin038.protonmail.ch (Postfix) with ESMTPS id 4SZRvW189Cz3T for <forst@pen.gy>; Tue, 21 Nov 2023 14:43:35 +0000 (UTC)
+Authentication-Results: mail.protonmail.ch; dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="NtFiZII5"
+Authentication-Results: mail.protonmail.ch; arc=none smtp.remote-ip=195.135.220.29
+Authentication-Results: mail.protonmail.ch; spf=pass smtp.mailfrom=suse.com
+Authentication-Results: mail.protonmail.ch; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+Authentication-Results: mail.protonmail.ch; dkim=pass (Good 1024 bit    rsa-sha256 signature) header.d=suse.com header.a=rsa-sha256
+Delivered-To: forst@pen.gy
+X-Original-To: forst@pen.gy
+Return-Path: <oneukum@suse.com>
+
+ipheth_sndbulk_callback() can submit carrier_work
+as a part of its error handling. That means that
+the driver must make sure that the work is cancelled
+after it has made sure that no more URB can terminate
+with an error condition.
+
+Hence the order of actions in ipeth_close() needs
+to be inverted.
+
+Signed-off-by: Oliver Neukum <oneukum@suse.com>
+---
+ drivers/net/usb/ipheth.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/drivers/net/usb/ipheth.c
++++ b/drivers/net/usb/ipheth.c
+@@ -479,8 +479,8 @@ static int ipheth_close(struct net_devic
+ {
+ 	struct ipheth_device *dev = netdev_priv(net);
+ 
+-	cancel_delayed_work_sync(&dev->carrier_work);
+ 	netif_stop_queue(net);
++	cancel_delayed_work_sync(&dev->carrier_work);
+ 	return 0;
+ }
+ 
