@@ -1,0 +1,111 @@
+Delivered-To: gvalkov@gmail.com
+Received: by 2002:ab2:9d1:0:b0:205:ab76:7763 with SMTP id l17csp556040lqd;
+        Wed, 31 Jul 2024 10:28:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHs8oPXr2Jmey44pvwnVV1hlSWKAvhfAK5dpvTzE1HhRn0cRZhkKiolkb4yzKJMcabRhNj8
+X-Received: by 2002:a05:6122:2016:b0:4f5:27a7:a08d with SMTP id 71dfb90a1353d-4f896658c72mr79747e0c.2.1722446880050;
+        Wed, 31 Jul 2024 10:28:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1722446880; cv=none;
+        d=google.com; s=arc-20160816;
+        b=WktC5QBKjkykLnKqwRgofbq7zlS95SoEWJZs19U1hWacHXSGvXjQf0gr2ttwEfIpRU
+         t1U7+VRdLm63r1m2qk7uSs/jrrnoonh3aXfyhRcP7yQi1Y+P5T22165NuFbT4hNOfsCQ
+         kmigpTDjjdDs32cVJk5mfZrefS2XYgCmt4B1gSsrPbg02H6y47Igtu+sKJMzQdznHrSS
+         UpZGto5wTUW+Cdd1aQDt38/L3/VybaxLnZkQ8Q1V+hzzrsKxsYlv+vh6k5Hd/ybXr0zS
+         kOE9gViCn8/odQscLari0XLkG6BGUQV3fiV2+Gp4kunzsTH/3t8PNWORpBkFBgYp1tj1
+         g/HQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:dkim-signature;
+        bh=JAXeomL6Y/PCfeb+a+AshRBRu8U648RUc91mSSf/Zyg=;
+        fh=TgFG3U4anRQdIImvNWYNegQTU2dZOq5zNGqYwYfO2Os=;
+        b=eR+X1/YfCek+KSM6U3JGXkcGJCP09vQS9kEESwc2p/ZOy2foc8nPZGEs6lfgOrjfAy
+         DBt2VkjfYCeEEZcNLT3VNOnSVY4ShHgXaC2sutPN5He7f1yjslVzRrgDr5hckMlEyJUM
+         n8N3LqjVbCtDZa/1T6YrrOj1VTv8nDWvoEbE5tyywC5T+mysLwnR+L2sh86JtarymwHT
+         3zvczYIU/4JF+YjIgkcNooXklHP9iwQopm/IazaAXz/SmvKZ7uDMbM32B2CMC7vCmzZC
+         m6YVUm8D3N/4D6GwqPiZT8ryyr7HMHNNeIYq9cITSrV0ZukotaNBVS9lTZUEuzbBkOgs
+         6PLg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=MrMxCm7T;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+Return-Path: <forst@pen.gy>
+Received: from qs51p00im-qukt01071502.me.com (qs51p00im-qukt01071502.me.com. [17.57.155.5])
+        by mx.google.com with ESMTPS id af79cd13be357-7a1d7446602si1588567585a.282.2024.07.31.10.27.59
+        for <gvalkov@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 31 Jul 2024 10:27:59 -0700 (PDT)
+Received-SPF: pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) client-ip=17.57.155.5;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=MrMxCm7T;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pen.gy; s=sig1;
+	t=1722446879; bh=JAXeomL6Y/PCfeb+a+AshRBRu8U648RUc91mSSf/Zyg=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=MrMxCm7T82MNcV6FlTHoYU+Y1ykrVDH0wdLpGlsVx0S+6bAJI5KQcaI3Gfxrku9uY
+	 uF7aetZ274XNb5Z4vzA+R7SW22Ex8ewLTF3KycbuScCMyXN9tsvPjGgdT9rTX3vl+W
+	 CdSFtzv708xpLBxIfJiEezbODlYJJjrWAB7rTo4KwGY9jEswVfXbpAe93UOOg1QuAi
+	 YnFrSpDHTt4axUzKbVcE9L0tEHdY5zpw+xZBymoF2KacSpKVkJ4D3lfRToRO/IYMR2
+	 wD6e93JErLmmpfCNwGOny2OIpEvQPkIeO6mB2hUXSpvldJMlQpB1ZTZLlhFtOwa5IZ
+	 nYH1yRGMxRSXA==
+Received: from fossa.. (qs51p00im-dlb-asmtp-mailmevip.me.com [17.57.155.28])
+	by qs51p00im-qukt01071502.me.com (Postfix) with ESMTPSA id 1FEFD66802B2
+	for <gvalkov@gmail.com>; Wed, 31 Jul 2024 17:27:57 +0000 (UTC)
+From: Foster Snowhill <forst@pen.gy>
+To: Georgi Valkov <gvalkov@gmail.com>
+Subject: [PATCH net-next 1/4] usbnet: ipheth: remove extraneous rx URB length check
+Date: Wed, 31 Jul 2024 19:27:31 +0200
+Message-ID: <20240731172734.254892-1-forst@pen.gy>
+X-Mailer: git-send-email 2.45.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: qzVfustZVCAwkPQ4wUavg0hp3ecBkHf-
+X-Proofpoint-ORIG-GUID: qzVfustZVCAwkPQ4wUavg0hp3ecBkHf-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-31_10,2024-07-31_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 mlxscore=0 malwarescore=0
+ suspectscore=0 spamscore=0 mlxlogscore=452 adultscore=0 bulkscore=0
+ clxscore=1030 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2407310122
+
+Rx URB length was already checked in ipheth_rcvbulk_callback_legacy()
+and ipheth_rcvbulk_callback_ncm(), depending on the current mode.
+The check in ipheth_rcvbulk_callback() was thus mostly a duplicate.
+
+The only place in ipheth_rcvbulk_callback() where we care about the URB
+length is for the initial control frame. These frames are always 4 bytes
+long. This has been checked as far back as iOS 4.2.1 on iPhone 3G.
+
+Remove the extraneous URB length check. For control frames, check for
+the specific 4-byte length instead.
+
+Signed-off-by: Foster Snowhill <forst@pen.gy>
+---
+ drivers/net/usb/ipheth.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+
+--- a/drivers/net/usb/ipheth.c
++++ b/drivers/net/usb/ipheth.c
+@@ -286,11 +286,6 @@ static void ipheth_rcvbulk_callback(stru
+ 		return;
+ 	}
+ 
+-	if (urb->actual_length <= IPHETH_IP_ALIGN) {
+-		dev->net->stats.rx_length_errors++;
+-		return;
+-	}
+-
+ 	/* RX URBs starting with 0x00 0x01 do not encapsulate Ethernet frames,
+ 	 * but rather are control frames. Their purpose is not documented, and
+ 	 * they don't affect driver functionality, okay to drop them.
+@@ -298,7 +293,8 @@ static void ipheth_rcvbulk_callback(stru
+ 	 * URB received from the bulk IN endpoint.
+ 	 */
+ 	if (unlikely
+-		(((char *)urb->transfer_buffer)[0] == 0 &&
++		(urb->actual_length == 4 &&
++		 ((char *)urb->transfer_buffer)[0] == 0 &&
+ 		 ((char *)urb->transfer_buffer)[1] == 1))
+ 		goto rx_submit;
+ 

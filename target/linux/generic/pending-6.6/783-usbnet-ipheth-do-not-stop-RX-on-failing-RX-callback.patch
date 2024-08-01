@@ -1,0 +1,99 @@
+Delivered-To: gvalkov@gmail.com
+Received: by 2002:ab2:9d1:0:b0:205:ab76:7763 with SMTP id l17csp556079lqd;
+        Wed, 31 Jul 2024 10:28:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGBg8RpPrUb3neRn2tlU46BCwZmi8F/HiERjdWExt/u67xHYs6Uy6l0Qe2thJKu0yl/tJTp
+X-Received: by 2002:a05:622a:5795:b0:44e:d016:ef8 with SMTP id d75a77b69052e-44fe5b4583emr152981841cf.8.1722446884103;
+        Wed, 31 Jul 2024 10:28:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1722446884; cv=none;
+        d=google.com; s=arc-20160816;
+        b=Nwdb4Yvtqtl4ubMDDj6SWuT/k7lDRxgOWViM7grY60VX2NwnMxpywWUX77K9v11twP
+         JYXmYvPXCZgIBlvxgJQC0Zw9dAbg8wNygVgxFeoOnJN6fBDA6xHiYKTlHoiIwXF1Xz78
+         9MrQU3D/XxHN3pUN6JCLp4klkWJwDsL2NQnIwZLRhjBa50SmMX68lFuD5+qk/L5E3pEZ
+         YCgT2Nq2RInxp5vbuB0bfPZIKXTy50bHX2KVHmsAqgZGMhlonsqTFvAoFRxNzWabcnvb
+         l9EQMuQ7+/MDyrZ2yl7In24FfryaTgew9sHGnyR43sXz9EmmebahMJU7F/OUI8iHrLVL
+         Vw0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:dkim-signature;
+        bh=aiuZqM6saTIKC84DPcMcePGaSBMxv4v9lWNZmMAzGWQ=;
+        fh=TgFG3U4anRQdIImvNWYNegQTU2dZOq5zNGqYwYfO2Os=;
+        b=nWP9+XiEOd04ZSjb2n5jinZ+/HbpYX8fW3nfvvEE3Kf4Sc9ODMS6IDWUu+UoQeyv0+
+         rkVgtMwrqwTVlbdKsGngydgeJ4eySrtNhhd+LRtxoASfLupU0oMNFX2zg1gcPqf2COFZ
+         z6ZD6XMF3uA2k9Ar+6F8GfOsnC32ICvMsiKP7oCFIL69XqV1eW5w505ZlILFvhDHInQE
+         ydbyxVp/rn7SRQPJZitZMuHQY3KxVBac0TNAeith7+LbX6LLL3H/ndjeQOM2+oB3Qahh
+         nn9xjHlOFDias+4INtKvQkYPi4o7yVFSfcXDFAyYa7l+nxWrk9l4xLlgt3LcqdXxH/ST
+         pFiA==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=SMP1By+5;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+Return-Path: <forst@pen.gy>
+Received: from qs51p00im-qukt01071502.me.com (qs51p00im-qukt01071502.me.com. [17.57.155.5])
+        by mx.google.com with ESMTPS id d75a77b69052e-44fe8535f02si150235131cf.734.2024.07.31.10.28.03
+        for <gvalkov@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 31 Jul 2024 10:28:03 -0700 (PDT)
+Received-SPF: pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) client-ip=17.57.155.5;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=SMP1By+5;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pen.gy; s=sig1;
+	t=1722446883; bh=aiuZqM6saTIKC84DPcMcePGaSBMxv4v9lWNZmMAzGWQ=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=SMP1By+5OZXFyFbTqfdhhHUOxBdR2xt9JoMu6K7peq5Nx+oGyrDfwnTC8rM++gEhg
+	 S2Imb++V7aEzwiucgJuAo1qwVADqOCJBJhz5ZzeMPE/D9jp6yTOS8qnsrgO80PJ2HK
+	 3/ppYZ2tVqIrbsPN8I56w86YMCQuGfwy2iH3ARHyoK2Ea6TkEoZHnbpZqovyeqALNB
+	 6ILtpf/3B4AOVY5pwt+ii0efVAsF+OPR4wA9RzLFmXUUxrbK/NmOEg5Z0aDQpe8/M5
+	 ZtkCTMcYqgTlndXPa5VcilfzcvPzu2YyRptym0gcx9w/QCIKD54o39qEFQ4A2+nCsd
+	 m60g2enztE5MQ==
+Received: from fossa.. (qs51p00im-dlb-asmtp-mailmevip.me.com [17.57.155.28])
+	by qs51p00im-qukt01071502.me.com (Postfix) with ESMTPSA id 1FD0266802C9
+	for <gvalkov@gmail.com>; Wed, 31 Jul 2024 17:28:01 +0000 (UTC)
+From: Foster Snowhill <forst@pen.gy>
+To: Georgi Valkov <gvalkov@gmail.com>
+Subject: [PATCH net-next 3/4] usbnet: ipheth: do not stop RX on failing RX callback
+Date: Wed, 31 Jul 2024 19:27:33 +0200
+Message-ID: <20240731172734.254892-3-forst@pen.gy>
+X-Mailer: git-send-email 2.45.1
+In-Reply-To: <20240731172734.254892-1-forst@pen.gy>
+References: <20240731172734.254892-1-forst@pen.gy>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: Aw3bmX8hpGSb0ncE8XFnIoriv049jtvY
+X-Proofpoint-ORIG-GUID: Aw3bmX8hpGSb0ncE8XFnIoriv049jtvY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-31_10,2024-07-31_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=2 phishscore=0 mlxscore=2 malwarescore=0
+ suspectscore=0 spamscore=2 mlxlogscore=175 adultscore=0 bulkscore=0
+ clxscore=1030 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2407310122
+
+RX callbacks can fail for multiple reasons:
+
+* Payload too short
+* Payload formatted incorrecly (e.g. bad NCM framing)
+* Lack of memory
+
+None of these should cause the driver to seize up.
+
+Make such failures non-critical and continue processing further
+incoming URBs.
+
+Signed-off-by: Foster Snowhill <forst@pen.gy>
+---
+ drivers/net/usb/ipheth.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+--- a/drivers/net/usb/ipheth.c
++++ b/drivers/net/usb/ipheth.c
+@@ -310,7 +310,6 @@ static void ipheth_rcvbulk_callback(stru
+ 	if (retval != 0) {
+ 		dev_err(&dev->intf->dev, "%s: callback retval: %d\n",
+ 			__func__, retval);
+-		return;
+ 	}
+ 
+ rx_submit:
