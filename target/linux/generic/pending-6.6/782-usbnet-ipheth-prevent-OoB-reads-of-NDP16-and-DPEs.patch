@@ -1,0 +1,193 @@
+Delivered-To: gvalkov@gmail.com
+Received: by 2002:ab2:60c7:0:b0:209:e234:e58c with SMTP id i7csp1476611lqm;
+        Sun, 1 Sep 2024 14:14:09 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IErSxLQvfgeE8T5DSw24ODr418szv8JNOWf6i9jYdPRn1Oiy73kLuC+CbYnH5gmRlQnce+O
+X-Received: by 2002:a17:90a:d910:b0:2d8:9040:d170 with SMTP id 98e67ed59e1d1-2d89040d1e0mr4612044a91.31.1725225248926;
+        Sun, 01 Sep 2024 14:14:08 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1725225248; cv=none;
+        d=google.com; s=arc-20240605;
+        b=kPBrerTeucoadtDGBNv6zKr9PSMq/araZJBIj10L3lxsupuF/PWYjlco4W2rVRsTfV
+         z5VCXcs5nl4P/3+Jys1J4vt6+hn6gKWXhsiDigyXEk2ZHzHlKD/g7Z4AJxIVpZvzTT1v
+         cdNM61Wb0mEcc/XUGKa5BFNR6XpXMrfWRylfvd3Cx6+TeZIx4DPk5GZJn4tvLDsSSQEj
+         PsDbWUoXfPi35uJpE4nF8nyas6PKeQ1vaQo9h8fsHfcMYQDR25PMhdyQKtK2Mc/ILE1W
+         V+uJgtATSU5I6CAujxYI0VGyd0b8OQtgLty2z6AltJUzUHYew7XPcUG0D3cmvF9yL5vx
+         0Law==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:dkim-signature;
+        bh=V/4fceMzE7tLL2vqNUIv04rPiyIODbT2w132vlh90ZM=;
+        fh=wDev2SkhzKz6Oe1QEINh+EdrBE0WlC9A/ftoPlRCiZ0=;
+        b=OpT/cggGdxqt+K/t/rjRbxR4+4wKNEYaII6waCI8z0YfFO2pnWvgqqmA2WA7t+YkdI
+         2MsfqHE24Vh0ANRQQZxgK4Kh/h24ZpkUqLCO4yeE502V8OOKt9YpIJ0BF+hUnTyShOMk
+         wzOP4+ZsXyNQck+AFSNAB8uaYo2M2wWuJvt2U2xYcmVA6E8i1Kx47gO0vkcJRKhwuKyg
+         IM7Svwx6Mr3EM/rZ9sBxKNoxfWI+uEcrWRARRHj1wN36ehQZ8mSYXNf0bDA3ZQt33SZf
+         AjaFpms9bAFwCEOd/zJ92txCMY3UyPH1Jc1YytfOza9AJi7jGwg92CrUeOVoZw3X7iOF
+         olSw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=cAyFrNwj;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.58.6.56 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+Return-Path: <forst@pen.gy>
+Received: from pv50p00im-ztdg10021801.me.com (pv50p00im-ztdg10021801.me.com. [17.58.6.56])
+        by mx.google.com with ESMTPS id 98e67ed59e1d1-2d8b8d97f0fsi2527524a91.31.2024.09.01.14.14.08
+        for <gvalkov@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 01 Sep 2024 14:14:08 -0700 (PDT)
+Received-SPF: pass (google.com: domain of forst@pen.gy designates 17.58.6.56 as permitted sender) client-ip=17.58.6.56;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=cAyFrNwj;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.58.6.56 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pen.gy; s=sig1;
+	t=1725225248; bh=V/4fceMzE7tLL2vqNUIv04rPiyIODbT2w132vlh90ZM=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=cAyFrNwj02a5H6JYEzq2cM6FGewgobi8G8wwbzOUvKG4SpXTGflun5YiybmymATR9
+	 6VHMg17GTnxm9mA9VSS88QhDboy58hhdqT0QKPj6Y/4rqeHtwJOUch7YFVdMfuaiXf
+	 qU8eRKCe366ZCh+OElqbLpNtxNxWXRReqvmmEACrnVT6bi9OdROkdd64dUEXTVs5Nj
+	 0gcnnPiMZZrEEACl5H49fc/2kM+BfDxihGhJanQ1PuZXC1xe+cOB08MIaPTWnkS6Uf
+	 iz4I32lEigCiNwAp9vvOSaKtr4L+W8+qFcRelnR0Xi5VW3n3w1Xbm9kEu+oH/htHtN
+	 rnVZSq23DF3Gw==
+Received: from fossa.se1.pen.gy (pv50p00im-dlb-asmtp-mailmevip.me.com [17.56.9.10])
+	by pv50p00im-ztdg10021801.me.com (Postfix) with ESMTPSA id 76ED82010221
+	for <gvalkov@gmail.com>; Sun,  1 Sep 2024 21:14:04 +0000 (UTC)
+From: Foster Snowhill <forst@pen.gy>
+To: gvalkov@gmail.com
+Subject: [PATCH] usbnet: ipheth: prevent OoB reads of NDP16 and DPEs
+Date: Sun,  1 Sep 2024 23:13:20 +0200
+Message-ID: <20240901211320.205430-1-forst@pen.gy>
+X-Mailer: git-send-email 2.45.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: uoZECy6J-x1ZXxS04Bw3FQaG-xf-gzej
+X-Proofpoint-ORIG-GUID: uoZECy6J-x1ZXxS04Bw3FQaG-xf-gzej
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-09-01_04,2024-08-30_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 spamscore=0
+ clxscore=1030 mlxscore=0 bulkscore=0 phishscore=0 malwarescore=0
+ adultscore=0 mlxlogscore=322 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2308100000 definitions=main-2409010181
+
+There were a few potential out of bounds reads when processing
+malformed URBs received from a connected device in NCM mode:
+
+* Only the start of NDP16 (wNdpIndex) was checked to fit in the URB
+  buffer.
+* Datagram length check as part of DPEs could overflow.
+* DPEs could be read past the end of NDP16 and even end of URB buffer
+  if a trailer DPE wasn't encountered.
+
+The above is not expected to happen in normal device operation.
+
+To address the above issues without reimplementing more of CDC NCM,
+rely on and check for a specific fixed format of incoming URBs:
+
+* 12-byte NTH16
+* 96-byte NDP16, allowing up to 22 DPEs (up to 21 datagrams + trailer)
+
+The length of NDP16 is constant regardless of the DPE count. NDP16
+directly follows NTH16.
+
+Adapt the driver to use the fixed URB format. Allow up to 22 DPEs.
+Always expect a null trailer DPE. The minimal URB length of 108 bytes
+(IPHETH_NCM_HEADER_SIZE) in NCM mode is enforced since introduction of
+NCM support.
+---
+ drivers/net/usb/ipheth.c | 60 ++++++++++++++++++++++------------------
+ 1 file changed, 33 insertions(+), 27 deletions(-)
+
+--- a/drivers/net/usb/ipheth.c
++++ b/drivers/net/usb/ipheth.c
+@@ -61,7 +61,13 @@
+ #define IPHETH_USBINTF_PROTO    1
+ 
+ #define IPHETH_IP_ALIGN		2	/* padding at front of URB */
+-#define IPHETH_NCM_HEADER_SIZE  (12 + 96) /* NCMH + NCM0 */
++/* On iOS devices, NCM headers in RX have a fixed size:
++ * - NTH16 (NCMH): 12 bytes, as per CDC NCM 1.0 standard
++ * - NDP16 (NCM0): 96 bytes
++ */
++#define IPHETH_NDP16_HEADER_SIZE 96
++#define IPHETH_NDP16_MAX_DPE    ((IPHETH_NDP16_HEADER_SIZE - 8) / sizeof(struct usb_cdc_ncm_dpe16))
++#define IPHETH_NCM_HEADER_SIZE  (sizeof(struct usb_cdc_ncm_nth16) + IPHETH_NDP16_HEADER_SIZE)
+ #define IPHETH_TX_BUF_SIZE      ETH_FRAME_LEN
+ #define IPHETH_RX_BUF_SIZE_LEGACY (IPHETH_IP_ALIGN + ETH_FRAME_LEN)
+ #define IPHETH_RX_BUF_SIZE_NCM	65536
+@@ -213,9 +219,9 @@ static int ipheth_rcvbulk_callback_ncm(s
+ 	struct usb_cdc_ncm_ndp16 *ncm0;
+ 	struct usb_cdc_ncm_dpe16 *dpe;
+ 	struct ipheth_device *dev;
++	uint16_t dg_idx, dg_len;
+ 	int retval = -EINVAL;
+ 	char *buf;
+-	int len;
+ 
+ 	dev = urb->context;
+ 
+@@ -225,40 +231,40 @@ static int ipheth_rcvbulk_callback_ncm(s
+ 	}
+ 
+ 	ncmh = urb->transfer_buffer;
+-	if (ncmh->dwSignature != cpu_to_le32(USB_CDC_NCM_NTH16_SIGN) ||
+-	    le16_to_cpu(ncmh->wNdpIndex) >= urb->actual_length) {
+-		dev->net->stats.rx_errors++;
+-		return retval;
+-	}
++	if (ncmh->dwSignature != cpu_to_le32(USB_CDC_NCM_NTH16_SIGN))
++		goto rx_error;
+ 
+-	ncm0 = urb->transfer_buffer + le16_to_cpu(ncmh->wNdpIndex);
+-	if (ncm0->dwSignature != cpu_to_le32(USB_CDC_NCM_NDP16_NOCRC_SIGN) ||
+-	    le16_to_cpu(ncmh->wHeaderLength) + le16_to_cpu(ncm0->wLength) >=
+-	    urb->actual_length) {
+-		dev->net->stats.rx_errors++;
+-		return retval;
+-	}
++	/* On iOS, NDP16 directly follows NTH16 */
++	ncm0 = urb->transfer_buffer + sizeof(struct usb_cdc_ncm_nth16);
++	if (ncm0->dwSignature != cpu_to_le32(USB_CDC_NCM_NDP16_NOCRC_SIGN))
++		goto rx_error;
+ 
+ 	dpe = ncm0->dpe16;
+-	while (le16_to_cpu(dpe->wDatagramIndex) != 0 &&
+-	       le16_to_cpu(dpe->wDatagramLength) != 0) {
+-		if (le16_to_cpu(dpe->wDatagramIndex) >= urb->actual_length ||
+-		    le16_to_cpu(dpe->wDatagramIndex) +
+-		    le16_to_cpu(dpe->wDatagramLength) > urb->actual_length) {
+-			dev->net->stats.rx_length_errors++;
+-			return retval;
+-		}
++	for (int dpe_i = 0; dpe_i < IPHETH_NDP16_MAX_DPE; ++dpe_i, ++dpe) {
++		dg_idx = le16_to_cpu(dpe->wDatagramIndex);
++		dg_len = le16_to_cpu(dpe->wDatagramLength);
++
++		/* Null DPE must be present after last datagram pointer entry */
++		if (dg_idx == 0 && dg_len == 0)
++			goto dpe_end;
++
++		if (dg_idx < IPHETH_NCM_HEADER_SIZE ||
++		    dg_idx >= urb->actual_length ||
++		    dg_len > urb->actual_length - dg_idx)
++			goto rx_error;
+ 
+-		buf = urb->transfer_buffer + le16_to_cpu(dpe->wDatagramIndex);
+-		len = le16_to_cpu(dpe->wDatagramLength);
++		buf = urb->transfer_buffer + dg_idx;
+ 
+-		retval = ipheth_consume_skb(buf, len, dev);
++		retval = ipheth_consume_skb(buf, dg_len, dev);
+ 		if (retval != 0)
+ 			return retval;
+-
+-		dpe++;
+ 	}
+ 
++rx_error:
++	dev->net->stats.rx_errors++;
++	return retval;
++
++dpe_end:
+ 	return 0;
+ }
+ 
