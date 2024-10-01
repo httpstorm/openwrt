@@ -1,0 +1,104 @@
+Delivered-To: gvalkov@gmail.com
+Received: by 2002:ab2:9d1:0:b0:205:ab76:7763 with SMTP id l17csp556055lqd;
+        Wed, 31 Jul 2024 10:28:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHrDpIxIGZXwaZlS81lsvehEWqPvKKesm1hkqLKeMSasDUATqMm9FDlELktF3mXfL87ycUL
+X-Received: by 2002:a05:6102:160c:b0:492:a4f3:34c2 with SMTP id ada2fe7eead31-493d867ab91mr11517444137.5.1722446881920;
+        Wed, 31 Jul 2024 10:28:01 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1722446881; cv=none;
+        d=google.com; s=arc-20160816;
+        b=lEVolJsxA/3zXwIi/rLtqqB4kzYrMJbUjkauw6UXpNmUkYjKeKMZsPo0JnolKpw7YP
+         q7G1L8aG/qYZL1IwN7XABWCpVbpwOpVPGBwNlthWUhftilkw5JBXtOeN0RiZ5jvgrafy
+         bcoTwxAUisIp9xunUUs3i4dcQoJZ2/4s36xag9iWvsBcI2ALrfp5g1a32smWjXXrsMJS
+         QzH7t0a0pZo8ahabinkFUt33SnRYpm4ytyMtseRzpybLqRvLLVtl/CI3hf+7YY8FQ6f1
+         InEPWpKFsRqQLHJfrR4KIReB4aWaDCdl1WzKXAZIVMq4/TczR4dJz1HNNr+GXE+aSKl2
+         aQWg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:dkim-signature;
+        bh=7TnZ9wmhclqi+/K/yxe2n2pIhqytSn4ENrDTdQinx6k=;
+        fh=TgFG3U4anRQdIImvNWYNegQTU2dZOq5zNGqYwYfO2Os=;
+        b=ORpq92V+YyPgqypf3c3JxurU6+QCdeJO7uippBMYaHs1lr1lOL13jRD7IWSiQtylgY
+         //+AAyYYupRtffrZCsOEcXJqbcInsPZD5Jf/PdiRGhdt0XvIcYVJeVYF2aEZPO2am2Lj
+         vDc75lRLEKKEVVrsZPdMJmvsr/QQRPbBrOhTfC05GBHPZ3F0Md67Aw/pYPDo9S826izJ
+         1srz0qFfXB7mG496rQaahaurKDZtqKax7uYdwlDvMBqxTTB4AqlSmMjanslUFxMfRZrD
+         2c40vFd4hLxqzdC6BcuLVrlOM8y4cnBM6gXXwTYVjN1z4Ro9BJc+VYKWyXyHmZbMpxNR
+         wu9g==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=muyzD8h4;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+Return-Path: <forst@pen.gy>
+Received: from qs51p00im-qukt01071502.me.com (qs51p00im-qukt01071502.me.com. [17.57.155.5])
+        by mx.google.com with ESMTPS id af79cd13be357-7a1d7475094si1571765785a.587.2024.07.31.10.28.01
+        for <gvalkov@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 31 Jul 2024 10:28:01 -0700 (PDT)
+Received-SPF: pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) client-ip=17.57.155.5;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@pen.gy header.s=sig1 header.b=muyzD8h4;
+       spf=pass (google.com: domain of forst@pen.gy designates 17.57.155.5 as permitted sender) smtp.mailfrom=forst@pen.gy;
+       dmarc=pass (p=REJECT sp=NONE dis=NONE) header.from=pen.gy
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pen.gy; s=sig1;
+	t=1722446881; bh=7TnZ9wmhclqi+/K/yxe2n2pIhqytSn4ENrDTdQinx6k=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=muyzD8h42ky3LsXBD8zwX17pQVXuCYG2eEFd0VUR04OAKkMWQBB36ZxyOXOC122pD
+	 LWBodOQmmlATB7QHN4sbzknjfu1KlrwIrBk0dcjfbzeQGF4o5pEd1TeSszfLYk0eEI
+	 HfscrQSde1KvKHiMBIU36lqmvbx6RLIdR9MYRqCGkFa476UcQCCZVrQcwankIxb8KC
+	 PsOniQMV9yHrFedD+5+T+K3zPMALPXshm+lkMYaabVGoDXoFGSbCL74R34M9vM8e2V
+	 +Kl5OSSoj+O7NxVuDswITm/RNTyCZ5vgfo5df5ceNIPGU/ojPS6yjrBG1cCgVjI6f3
+	 lXIe1Q5oc16OQ==
+Received: from fossa.. (qs51p00im-dlb-asmtp-mailmevip.me.com [17.57.155.28])
+	by qs51p00im-qukt01071502.me.com (Postfix) with ESMTPSA id 1F98466803B0
+	for <gvalkov@gmail.com>; Wed, 31 Jul 2024 17:27:59 +0000 (UTC)
+From: Foster Snowhill <forst@pen.gy>
+To: Georgi Valkov <gvalkov@gmail.com>
+Subject: [PATCH net-next 2/4] usbnet: ipheth: drop RX URBs with no payload
+Date: Wed, 31 Jul 2024 19:27:32 +0200
+Message-ID: <20240731172734.254892-2-forst@pen.gy>
+X-Mailer: git-send-email 2.45.1
+In-Reply-To: <20240731172734.254892-1-forst@pen.gy>
+References: <20240731172734.254892-1-forst@pen.gy>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: 0HMSZsXpD35FqsNIwkI-XI5TYKfYCDCV
+X-Proofpoint-ORIG-GUID: 0HMSZsXpD35FqsNIwkI-XI5TYKfYCDCV
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-07-31_10,2024-07-31_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 mlxscore=0 malwarescore=0
+ suspectscore=0 spamscore=0 mlxlogscore=608 adultscore=0 bulkscore=0
+ clxscore=1030 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2308100000 definitions=main-2407310122
+
+On iPhone 15 Pro Max on iOS 17.5.1 one can observe periodic URBs with
+no payload on the "bulk in" (RX) endpoint. These don't seem to do
+anything meaningful.
+
+This behaviour isn't observed on iPhone 11 on the same iOS version. The
+nature of these zero-length URBs is so far unknown.
+
+Drop RX URBs with no payload.
+
+Signed-off-by: Foster Snowhill <forst@pen.gy>
+---
+ drivers/net/usb/ipheth.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+--- a/drivers/net/usb/ipheth.c
++++ b/drivers/net/usb/ipheth.c
+@@ -292,6 +292,14 @@ static void ipheth_rcvbulk_callback(stru
+ 	if (urb->actual_length == 0)
+ 		goto rx_submit;
+ 
++	/* iPhone may periodically send URBs with no payload
++	 * on the "bulk in" endpoint. It is safe to ignore them.
++	 */
++	if (urb->actual_length == 0) {
++		dev_dbg(&dev->intf->dev, "%s: empty 'bulk in' URB skipped\n", __func__);
++		goto rx_submit;
++	}
++
+ 	/* RX URBs starting with 0x00 0x01 do not encapsulate Ethernet frames,
+ 	 * but rather are control frames. Their purpose is not documented, and
+ 	 * they don't affect driver functionality, okay to drop them.
